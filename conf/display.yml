@@ -23,20 +23,14 @@ excludeSections: []
 techStack:
   languages:
     - ts
+    - php
     - js
     - go
-    - py
-    - ruby
-    - cpp
-    - c
-    - rust
-    - java
-    - svelte
     - vue
   frameworks:
-    - svelte
+    - laravel
     - vue
-    - tauri
+    - react
   infrastructure:
     - docker
     - aws
@@ -46,7 +40,8 @@ techStack:
   tools:
     - git
     - github
-    - vscode
+    - gitlab
+    - cursor
     - latex
     - bash
 
