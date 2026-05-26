@@ -5,7 +5,7 @@
 <style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
 
 
-    <text x="24" y="38" fill="#58a6ff" font-size="16" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">soranjiro</text>
+    <text x="24" y="38" fill="#58a6ff" font-size="16" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">ryukoeng</text>
     <text x="24" y="58" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Joined GitHub 3 years ago</text>
     <text x="24" y="74" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Followed by 9 users</text>
     <rect x="210" y="22" width="14" height="14" rx="2" fill="#26a641"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.00s" fill="freeze"/></rect>
