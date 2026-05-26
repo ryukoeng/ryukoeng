@@ -1,4 +1,4 @@
-![](https://komarev.com/ghpvc/?username=ryukoeng&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
+![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
 <div align="center">
 
@@ -37,12 +37,12 @@
 
 <br>
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-ryukoeng.github.io%2Fryukoeng-blue?style=for-the-badge&logo=github)](https://ryukoeng.github.io/ryukoeng/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-soranjiro.github.io%2Fsoranjiro-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
 
 ---
 
 <sub>
-  Auto-generated daily via <a href="https://github.com/ryukoeng/ryukoeng/actions">GitHub Actions</a>
+  Auto-generated daily via <a href="https://github.com/soranjiro/soranjiro/actions">GitHub Actions</a>
   · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
   · Last updated: 2026-05-26
 </sub>

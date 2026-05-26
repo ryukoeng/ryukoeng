@@ -1,4 +1,20 @@
-![](https://komarev.com/ghpvc/?username=ryukoeng&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
+import { readFileSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, "..");
+const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
+
+const { profile } = data;
+const repository = data.repository || {};
+
+const today = new Date().toISOString().slice(0, 10);
+const dashboardUrl = repository.pagesUrl || `https://${profile.login}.github.io/${profile.login}/`;
+const dashboardLabel = dashboardUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+const actionsRepo = repository.fullName || `${profile.login}/${profile.login}`;
+
+const readme = `![](https://komarev.com/ghpvc/?username=${profile.login}&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
 <div align="center">
 
@@ -37,14 +53,21 @@
 
 <br>
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-ryukoeng.github.io%2Fryukoeng-blue?style=for-the-badge&logo=github)](https://ryukoeng.github.io/ryukoeng/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-${encodeURIComponent(dashboardLabel)}-blue?style=for-the-badge&logo=github)](${dashboardUrl})
 
 ---
 
 <sub>
-  Auto-generated daily via <a href="https://github.com/ryukoeng/ryukoeng/actions">GitHub Actions</a>
+  Auto-generated daily via <a href="https://github.com/${actionsRepo}/actions">GitHub Actions</a>
   · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
-  · Last updated: 2026-05-26
+  · Last updated: ${today}
 </sub>
 
 </div>
+`;
+
+writeFileSync(join(ROOT, "README.md"), readme);
+console.log("README.md written to root");
+
+writeFileSync(join(ROOT, "output/README.md"), readme);
+console.log("README.md also written to output/README.md");

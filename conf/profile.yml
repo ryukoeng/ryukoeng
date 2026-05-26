@@ -1,0 +1,28 @@
+# User Profile
+# This file is used by the AI summary generator to produce a more accurate profile description.
+# Edit the fields below to reflect your actual background and interests.
+
+bio: |
+  An engineer who just wants to enjoy what he does.
+  Working mainly on backend development and AWS infrastructure.
+
+keywords:
+  - backend engineer
+  - AWS
+  - infrastructure
+  - cloud
+
+roles:
+  - Backend Engineer
+
+interests:
+  - Software Development
+  - Shiba Inu
+  - Strength Training
+
+techHighlights:
+  - Laravel (work)
+  - Go (work / personal)
+  - TypeScript (personal)
+  - AWS / Terraform (work)
+  - Docker / CI/CD
