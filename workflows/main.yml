@@ -1,0 +1,7 @@
+- name: Commit & Push
+  run: |
+    git config user.name "ryukoeng"
+    git config user.email "ryukoeng@gmail.com"
+    git add -A .
+    git commit -m "generated"
+    git push
