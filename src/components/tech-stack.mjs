@@ -1,65 +1,61 @@
 export function renderTechStack(data) {
   const langMap = {};
-  (data.overallLanguages || []).forEach(l => { langMap[l.name] = true; });
+  (data.overallLanguages || []).forEach((l) => {
+    langMap[l.name] = true;
+  });
 
   const iconMap = {
-    'Ruby':       { icon: 'ruby-plain', label: 'Ruby', cat: 'Languages' },
-    'Python':     { icon: 'python-plain', label: 'Python', cat: 'Languages' },
-    'Go':         { icon: 'go-original-wordmark', label: 'Go', cat: 'Languages' },
-    'TypeScript': { icon: 'typescript-plain', label: 'TypeScript', cat: 'Languages' },
-    'JavaScript': { icon: 'javascript-plain', label: 'JavaScript', cat: 'Languages' },
-    'Rust':       { icon: 'rust-original', label: 'Rust', cat: 'Languages' },
-    'C++':        { icon: 'cplusplus-plain', label: 'C++', cat: 'Languages' },
-    'Java':       { icon: 'java-plain', label: 'Java', cat: 'Languages' },
-    'C':          { icon: 'c-plain', label: 'C', cat: 'Languages' },
-    'C#':         { icon: 'csharp-plain', label: 'C#', cat: 'Languages' },
-    'PHP':        { icon: 'php-plain', label: 'PHP', cat: 'Languages' },
-    'Swift':      { icon: 'swift-plain', label: 'Swift', cat: 'Languages' },
-    'Kotlin':     { icon: 'kotlin-plain', label: 'Kotlin', cat: 'Languages' },
-    'Dart':       { icon: 'dart-plain', label: 'Dart', cat: 'Languages' },
-    'Svelte':     { icon: 'svelte-plain', label: 'Svelte', cat: 'Frameworks' },
-    'Vue':        { icon: 'vuejs-plain', label: 'Vue', cat: 'Frameworks' },
-    'HCL':        { icon: 'terraform-plain', label: 'Terraform', cat: 'DevOps' },
-    'Dockerfile': { icon: 'docker-plain', label: 'Docker', cat: 'DevOps' },
-    'Shell':      { icon: 'bash-plain', label: 'Shell', cat: 'Tools' },
+    Go: { icon: "go-original-wordmark", label: "Go", cat: "Languages" },
+    TypeScript: {
+      icon: "typescript-plain",
+      label: "TypeScript",
+      cat: "Languages",
+    },
+    PHP: { icon: "php-plain", label: "PHP", cat: "Languages" },
+    Svelte: { icon: "laravel-plain", label: "Laravel", cat: "Frameworks" },
+    HCL: { icon: "terraform-plain", label: "Terraform", cat: "DevOps" },
+    Dockerfile: { icon: "docker-plain", label: "Docker", cat: "DevOps" },
+    Shell: { icon: "bash-plain", label: "Shell", cat: "Tools" },
   };
 
   const extraTools = [
-    { icon: 'react-original', label: 'React', cat: 'Frameworks' },
-    { icon: 'nextjs-plain', label: 'Next.js', cat: 'Frameworks' },
-    { icon: 'rails-plain', label: 'Rails', cat: 'Frameworks' },
-    { icon: 'amazonwebservices-plain-wordmark', label: 'AWS', cat: 'DevOps' },
-    { icon: 'github-original', label: 'GitHub', cat: 'Tools' },
-    { icon: 'postgresql-plain', label: 'PostgreSQL', cat: 'Tools' },
-    { icon: 'linux-plain', label: 'Linux', cat: 'Tools' },
-    { icon: 'kaggle-original', label: 'Kaggle', cat: 'ML/Data' },
+    { icon: "react-original", label: "React", cat: "Frameworks" },
+    { icon: "nextjs-plain", label: "Next.js", cat: "Frameworks" },
+    { icon: "amazonwebservices-plain-wordmark", label: "AWS", cat: "DevOps" },
+    { icon: "github-original", label: "GitHub", cat: "Tools" },
+    { icon: "postgresql-plain", label: "PostgreSQL", cat: "Tools" },
+    { icon: "linux-plain", label: "Linux", cat: "Tools" },
   ];
 
   const allIcons = [];
   Object.entries(iconMap).forEach(([lang, info]) => {
     if (langMap[lang]) allIcons.push(info);
   });
-  extraTools.forEach(t => allIcons.push(t));
+  extraTools.forEach((t) => allIcons.push(t));
 
   const categories = {};
-  allIcons.forEach(t => {
+  allIcons.forEach((t) => {
     if (!categories[t.cat]) categories[t.cat] = [];
     categories[t.cat].push(t);
   });
 
-  const sections = Object.entries(categories).map(([cat, tools]) => {
-    const icons = tools.map(t => {
-      const inner = `<i class="devicon-${t.icon} colored"></i><span>${t.label}</span>`;
-      if (t.link) {
-        return `<a href="${t.link}" target="_blank" rel="noopener" class="tech-item">${inner}</a>`;
-      }
-      return `<div class="tech-item">${inner}</div>`;
-    }).join('');
-    return `<div class="tech-category">
+  const sections = Object.entries(categories)
+    .map(([cat, tools]) => {
+      const icons = tools
+        .map((t) => {
+          const inner = `<i class="devicon-${t.icon} colored"></i><span>${t.label}</span>`;
+          if (t.link) {
+            return `<a href="${t.link}" target="_blank" rel="noopener" class="tech-item">${inner}</a>`;
+          }
+          return `<div class="tech-item">${inner}</div>`;
+        })
+        .join("");
+      return `<div class="tech-category">
       <div class="tech-cat-label">${cat}</div>
       <div class="tech-icons">${icons}</div>
     </div>`;
-  }).join('');
+    })
+    .join("");
 
   return `
     <div class="tech-area anim d8">
