@@ -8,6 +8,26 @@ const SVG_DIR = join(ROOT, "output/assets/svg");
 mkdirSync(SVG_DIR, { recursive: true });
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
+function loadTechStack() {
+  try {
+    const yml = readFileSync(join(ROOT, "conf/display.yml"), "utf-8");
+    const m = yml.match(/^techStack:\s*\n((?:(?:[ \t]+[^\n]*|\s*)\n?)+?)(?=^\S|\Z)/m);
+    if (!m) return {};
+    const result = {};
+    let key = null;
+    for (const raw of m[1].split("\n")) {
+      const line = raw.replace(/#.*$/, "");
+      const keyMatch = line.match(/^[ \t]{2}(\w+):\s*$/);
+      const itemMatch = line.match(/^[ \t]{4,}-\s*(\S.*?)\s*$/);
+      if (keyMatch) { key = keyMatch[1]; result[key] = []; }
+      else if (itemMatch && key) result[key].push(itemMatch[1]);
+    }
+    return result;
+  } catch {
+    return {};
+  }
+}
+
 function esc(s) {
   return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
@@ -514,27 +534,17 @@ async function generateChartsSVG(theme) {
   });
 
   // ── Skill Stack (skillicons.dev) ──
-  const skillIconMap = {
-    'TypeScript': 'ts', 'JavaScript': 'js', 'Go': 'go', 'Python': 'py',
-    'Ruby': 'ruby', 'C++': 'cpp', 'C': 'c', 'Rust': 'rust', 'Java': 'java',
-    'Svelte': 'svelte', 'Vue': 'vue', 'Tauri': 'tauri', 'React': 'react',
-    'Next.js': 'nextjs', 'Rails': 'rails',
-    'Docker': 'docker', 'AWS': 'aws', 'Terraform': 'terraform',
-    'Linux': 'linux', 'PostgreSQL': 'postgres',
-    'Git': 'git', 'GitHub': 'github', 'VS Code': 'vscode',
-    'LaTeX': 'latex', 'Bash': 'bash',
-  };
-
+  const techStack = loadTechStack();
   const skillCategories = [
-    { label: 'LANGUAGES', items: ['TypeScript', 'JavaScript', 'Go', 'Python', 'Ruby', 'C++', 'C', 'Rust', 'Java'] },
-    { label: 'FRAMEWORKS', items: ['Svelte', 'Vue', 'Tauri', 'React', 'Next.js', 'Rails'] },
-    { label: 'INFRA', items: ['Docker', 'AWS', 'Terraform', 'Linux', 'PostgreSQL'] },
-    { label: 'TOOLS', items: ['Git', 'GitHub', 'VS Code', 'LaTeX', 'Bash'] },
-  ];
+    { label: 'LANGUAGES', items: techStack.languages || [] },
+    { label: 'FRAMEWORKS', items: techStack.frameworks || [] },
+    { label: 'INFRA', items: techStack.infrastructure || [] },
+    { label: 'TOOLS', items: techStack.tools || [] },
+  ].filter(c => c.items.length > 0);
 
   const iconDataURIs = {};
   for (const cat of skillCategories) {
-    const ids = cat.items.map(name => skillIconMap[name]).join(',');
+    const ids = cat.items.join(',');
     const url = `https://skillicons.dev/icons?i=${ids}&theme=${theme}`;
     try {
       const res = await fetch(url);
